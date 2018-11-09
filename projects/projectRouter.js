@@ -57,8 +57,14 @@ router.put("/:id", (req, res) => {
             res.status(400).json({ error: "Please make sure the project name and/or description are indexed." })
         }
         else {
-            projectDB.update(id, projectData);
-            res.status(201).json(projectData);
+            projectDB.update(id, projectData)
+                .then(update => {
+                    if (update === null) {
+                        res.status(404).json({ message: "The project with the specified ID does not exist." })
+        }
+                    else {
+                        res.status(201).json(projectData);
+                    }})
         }
     }
     catch (error) {

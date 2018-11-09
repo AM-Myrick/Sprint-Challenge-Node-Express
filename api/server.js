@@ -16,6 +16,6 @@ server.use('/api/projects', projectRouter);
 
 
 // action endpoints
-// server.use('/api/actions', actionRouter);
+server.use('/api/actions', actionRouter);
 
 module.exports = server;

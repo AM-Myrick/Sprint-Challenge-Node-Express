@@ -20,6 +20,21 @@ router.get("/", (req, res) => {
         })
 })
 
+router.get("/:id", (req, res) => {
+    const {id} = req.params;
+
+    projectDB.getProjectActions(id)
+        .then(projects => {
+            res.status(200).json(projects);
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ error: "The actions could not be retrieved." },
+                console.log(err))
+        })
+})
+
 router.post("/", (req, res) => {
     const projectData = req.body;
     const nameLimit = 128;
